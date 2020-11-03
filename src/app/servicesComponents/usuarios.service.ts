@@ -14,43 +14,43 @@ export class UsuariosService {
   ) { }
 
   get(query:any){
-    return this._model.querys('user/querys',query, 'post');
+    return this._model.querys('personas/querys',query, 'post');
   }
 
   cambiarContrasena(query:any){
-    return this._model.querys('user/resetiar',query, 'post');
+    return this._model.querys('personas/resetiar',query, 'post');
   }
 
   getInfo(query:any){
-    return this._model.querys('user/infoUser',query, 'post');
+    return this._model.querys('personas/infoUser',query, 'post');
   }
 
   darPuntos(query:any){
-    return this._model.querys('user/guardarPunto',query, 'post');
+    return this._model.querys('personas/guardarPunto',query, 'post');
   }
   
   getNivel(query:any){
-    return this._model.querys('user/nivelUser',query, 'post');
+    return this._model.querys('personas/nivelUser',query, 'post');
   }
 
   cambioPass(query:any){
-    return this._model.querys('user/cambioPass',query, 'post');
+    return this._model.querys('personas/cambioPass',query, 'post');
   }
 
   login(query:any){
-    return this._model.querys('user/login',query, 'post');
+    return this._model.querys('personas/login',query, 'post');
   }
 
   create(query:any){
-    return this._model.querys('user/register',query, 'post');
+    return this._model.querys('personas/register',query, 'post');
   }
 
   update(query:any){
-    return this._model.querys('user/'+query.id, query, 'put');
+    return this._model.querys('personas/'+query.id, query, 'put');
   }
   
   delete(query:any){
-    return this._model.querys('user/'+query.id, query, 'delete');
+    return this._model.querys('personas/'+query.id, query, 'delete');
   }
   procesoFacebook(){
     FB.getLoginStatus(function(response) {

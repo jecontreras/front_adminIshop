@@ -1,0 +1,151 @@
+<div class="content">
+    <div class="row">
+        <div class="col-12">
+            <h4>Seleccionar Fotos</h4>
+        </div>
+        <div class="col-12" *ngIf="!id">
+            <ngx-dropzone (change)="onSelects($event)">
+                <ngx-dropzone-label>Subir Fotos</ngx-dropzone-label>
+                <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f"
+                    [removable]="true" (removed)="onRemoves(f)" multiple="false">
+                    <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                </ngx-dropzone-image-preview>
+            </ngx-dropzone>
+            <div class="row">
+                <div class="col-4">
+                    <label for="exampleInputEmail1">Titulo</label>
+                    <input type="text" class="form-control" [(ngModel)]="data.titulo">
+                </div>
+                <div class="col-4">
+                    <label for="exampleInputEmail1">Precio Compra</label>
+                    <input currencyMask [(ngModel)]="data.precioCompra" class="form-control form-control-sm"
+                        [options]="opcionCurrencys" />
+                </div>
+                <div class="col-4">
+                    <label for="exampleInputEmail1">Precio Venta</label>
+                    <input currencyMask [(ngModel)]="data.precioVenta" class="form-control form-control-sm"
+                        [options]="opcionCurrencys" />
+                </div>
+                <div class="col-4">
+                    <label for="exampleInputEmail1">Precio Oferta</label>
+                    <input currencyMask [(ngModel)]="data.precioOferta" class="form-control form-control-sm"
+                        [options]="opcionCurrencys" />
+                </div>
+                <div class="col-4">
+                    <label for="exampleInputEmail1">Comision</label>
+                    <input currencyMask [(ngModel)]="data.comision" class="form-control form-control-sm"
+                        [options]="opcionCurrencys" />
+                </div>
+                <div class="col-4">
+                    <div class="d-flex justify-content-center">
+                        <button type="button" class="btn btn-success" (click)="subirVarios()"
+                            [disabled]="btnDisabled">Subir Imagen</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 row" *ngIf="id">
+            <div class="col-6 conten">
+                <div class="d-flex justify-content-center row" infiniteScroll [infiniteScrollDistance]="3"
+                    [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
+                    <div class="col-12 col-sm-4 col-xs-4" *ngFor="let item of listGaleria" (click)="verPublicacion( item )">
+                        <div class="marge-card mb-3">
+                            <div class="mat-elevation-z5 p-10">
+                                <div class="card mb-0 ng-trigger ng-trigger-cardRemove" animatesinitmode="show"
+                                    style="visibility: visible; opacity: 1;">
+                                    <div class="card-body ng-tns-c14-23 p-0 ng-star-inserted mouse"
+                                        (click)="openPublic( item )">
+                                        <img alt="Card image cap" class="card-img-top"
+                                            [src]="item.image || 'https://s3.amazonaws.com/publihazclick/default/fondoTareas.jpg'">
+                                    </div>
+                                    <div class="card-body ng-tns-c14-24 m-t-15 ng-star-inserted">
+                                        <h5 class="card-title mouse" (click)="openPublic( item )">{{ item.titulo }}</h5>
+                                        <button type="button" class="btn btn-danger" [disabled]="disableEliminar" (click)="eliminarSeleccion( item )">Eliminar Foto</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-6 content">
+                <div class="row">
+                    <div class="col-6 col-sm-4 col-md-4">
+                        <label for="exampleInputEmail1">Titulo</label>
+                        <input type="text" class="form-control" [(ngModel)]="data.titulo">
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-4">
+                        <label for="exampleInputEmail1">Sub Categoria</label>
+                        <select class="form-control form-control-sm" [(ngModel)]="data.idSubCategoria">
+                            <option [value]="item.id" *ngFor="let item of listSubCategorias">{{ item.nombre }}</option>
+                        </select>
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-4">
+                        <label for="exampleInputEmail1">Empresa</label>
+                        <input type="text" class="form-control" [disabled]="false" [(ngModel)]="data.idEmpresa">
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-4">
+                        <label for="exampleInputEmail1">cantidad</label>
+                        <input type="number" class="form-control" [(ngModel)]="data.cantidad">
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-4">
+                        <label for="exampleInputEmail1">precioVenta</label>
+                        <input currencyMask [(ngModel)]="data.precioVenta" class="form-control form-control-sm"
+                            [options]="opcionCurrencys" />
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-4">
+                        <label for="exampleInputEmail1">Precio Compra</label>
+                        <input currencyMask [(ngModel)]="data.precioCompra" class="form-control form-control-sm"
+                            [options]="opcionCurrencys" />
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-4">
+                        <label for="exampleInputEmail1">Precio Oferta</label>
+                        <input currencyMask [(ngModel)]="data.precioOferta" class="form-control form-control-sm"
+                            [options]="opcionCurrencys" />
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-4">
+                        <label for="exampleInputEmail1">Comision</label>
+                        <input currencyMask [(ngModel)]="data.comision" class="form-control form-control-sm"
+                            [options]="opcionCurrencys" />
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-4">
+                        <label for="exampleInputEmail1">Subasta</label>
+                        <input type="checkbox" class="form-control" [(ngModel)]="data.subasta">
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-4">
+                        <label for="exampleInputEmail1">Peso</label>
+                        <input type="text" class="form-control" [(ngModel)]="data.idPeso">
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-4">
+                        <label for="exampleInputEmail1">Marca</label>
+                        <select class="form-control form-control-sm" [(ngModel)]="data.marca">
+                            <option [value]="item.id" *ngFor="let item of listMarca">{{ item.nombre }}</option>
+                        </select>
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-4">
+                        <label for="exampleInputEmail1">Genero</label>
+                        <select class="form-control form-control-sm" [(ngModel)]="data.genero">
+                            <option [value]="item.id" *ngFor="let item of listGenero">{{ item.nombre }}</option>
+                        </select>
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-4">
+                        <label for="exampleInputEmail1">Ranking</label>
+                        <input type="text" class="form-control" [(ngModel)]="data.ranking">
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-4">
+                        <label for="exampleInputEmail1">Estado</label>
+                        <input type="checkbox" class="form-control" [(ngModel)]="data.estado">
+                    </div>
+                    <div class="col-12">
+                        <div class="d-flex flex-row-reverse bd-highlight">
+                            <div>
+                                <button type="button" class="btn btn-primary" [disabled]="disable" (click)="submit()">Actualizar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

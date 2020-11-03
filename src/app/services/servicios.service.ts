@@ -67,7 +67,7 @@ export class ServiciosService {
   querys(query:string, datas:any, METODO:string){
     let data = datas;
     if(!datas.where) datas.where = {};
-    data.skip = datas.page ? datas.page : 0;
+    data.page = datas.page ? datas.page : 0;
     data.limit = datas.limit ? datas.limit : 10;
     query = URL+`/${query}`;
     delete data.where.app;
@@ -129,30 +129,5 @@ export class ServiciosService {
       this.disable_reconect = true;
       this.init_process_socket()
     });
-  }
-  query(modelo: string, query: any) {
-    if (!query) {
-      query = {};
-    }
-    if (!query.where) {
-      query = {
-        where: query
-      }
-        ;
-    }
-    const ruta = _.split(modelo, '/', 2);
-    if (ruta[1]) {
-      modelo = modelo;
-    } else {
-      modelo = modelo + '/query';
-    }
-
-    query.app = this.adsSecuryty();
-    return this.http.post(URL + modelo, query).pipe(
-      catchError(this.handleError)
-    );
-  }
-  private adsSecuryty() {
-    return 'publihazclickrootadmin';
   }
 }

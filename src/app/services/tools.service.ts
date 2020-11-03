@@ -8,7 +8,8 @@ export class ToolsService {
   
   loading:any;
   formatoMoneda:any = { prefix: 'COP$ ',align: 'left', thousands: '.', decimal: ',', precision: 0 };
-
+  currency:any = { prefix: '$ ',align: 'left', thousands: '.', decimal: ',', precision: 0 };
+  
   constructor(
   ) { }
  

@@ -8,36 +8,23 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { NgxCurrencyModule } from "ngx-currency";
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { HomeComponent } from './component/home/home.component';
-import { FleteComponent } from './component/flete/flete.component';
-import { FormFleteComponent } from './form/form-flete/form-flete.component';
-import { ElaboracionGuiasComponent } from './component/elaboracion-guias/elaboracion-guias.component';
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
-import { EstadoGuiasComponent } from './component/estado-guias/estado-guias.component';
-import { SolicitudRecogidaComponent } from './form/solicitud-recogida/solicitud-recogida.component';
-import { ListRecogiaComponent } from './component/list-recogia/list-recogia.component';
-import { PerfilComponent } from './component/perfil/perfil.component';
-import { RelacionDespachoComponent } from './component/relacion-despacho/relacion-despacho.component';
-import { TokenPlatformComponent } from './component/token-platform/token-platform.component';
-import { FormEstadoGuiaComponent } from './form/form-estado-guia/form-estado-guia.component';
 import { ComponentModule } from '../component/component.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProductoComponent } from './component/producto/producto.component';
+import { FormproductoComponent } from './form/formproducto/formproducto.component';
 
 @NgModule({
   declarations: [ 
     HomeComponent,
     PagesComponent,
-    FleteComponent,
-    FormFleteComponent,
-    ElaboracionGuiasComponent,
-    EstadoGuiasComponent,
-    SolicitudRecogidaComponent,
-    ListRecogiaComponent,
-    PerfilComponent,
-    RelacionDespachoComponent,
-    TokenPlatformComponent,
-    FormEstadoGuiaComponent
+    ProductoComponent,
+    FormproductoComponent
   ],
   imports: [
     ComponentModule,
+    FormsModule,
+    ReactiveFormsModule,
     CommonModule,
     PagesRoutingModule,
     SharedModule,

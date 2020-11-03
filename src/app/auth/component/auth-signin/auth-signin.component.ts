@@ -25,7 +25,7 @@ export class AuthSigninComponent implements OnInit {
     private _authSrvice: AuthService
   ) { 
     if (this._authSrvice.isLoggedIn()) {
-      this._router.navigate(['/dashboard/elaboracionguias']);
+      this._router.navigate(['/dashboard/home']);
     }
   }
 
@@ -57,7 +57,7 @@ export class AuthSigninComponent implements OnInit {
   }
 
   validador(){
-    if( !this.data.username ) { this._tools.tooast({ title:"Ingresar su username",icon: "warning" }); return false; }
+    if( !this.data.cedula ) { this._tools.tooast({ title:"Ingresar su Cedula",icon: "warning" }); return false; }
     if( !this.data.password ) { this._tools.tooast({ title:"Ingresar su Contreseña",icon: "warning" }); return false; }
     return true;
   }
@@ -65,7 +65,7 @@ export class AuthSigninComponent implements OnInit {
   ProcesoStorages( res:any ){
     let accion:any = new UserAction(res.data, 'post');
     this._store.dispatch(accion);
-    this._router.navigate(['/dashboard/elaboracionguias']);
+    this._router.navigate(['/dashboard/home']);
   }
 
 

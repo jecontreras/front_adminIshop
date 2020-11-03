@@ -36,60 +36,19 @@ const NavigationItems = [
     icon: 'feather icon-monitor',
     children: [
       {
-        id: 'flete',
-        title: 'Elaboracion de guias',
+        id: 'productos',
+        title: 'Productos',
         type: 'item',
         disabled: false,
-        url: '/dashboard/elaboracionguias',
+        url: '/dashboard/producto',
         icon: 'feather icon-home'
       },
       {
-        id: 'flete',
-        title: 'Estado de guias',
+        id: 'productosCrear',
+        title: 'Productos Crear',
         type: 'item',
         disabled: false,
-        url: '/dashboard/estadoGuias',
-        icon: 'feather icon-home'
-      },
-      {
-        id: 'solicitud-recogia',
-        title: 'Solicitud Recogia',
-        type: 'item',
-        disabled: false,
-        url: '/dashboard/solicitudrecogia',
-        icon: 'feather icon-home'
-      },
-      {
-        id: 'solicitud-recogia',
-        title: 'Lista de Recogia',
-        type: 'item',
-        disabled: false,
-        url: '/dashboard/listrecogia',
-        icon: 'feather icon-home'
-      },
-      {
-        id: 'relacion-despacho',
-        title: 'Mis Relaciones despacho',
-        type: 'item',
-        disabled: false,
-        url: '/dashboard/relaciondespacho',
-        icon: 'feather icon-home'
-      },
-      {
-        id: 'configuracion-platform',
-        title: 'Configurar Plataforma',
-        type: 'collapse',
-        disabled: true,
-        children:[
-          {
-            id: 'configuracion-tokens',
-            title: 'Configurar Tokens Platform',
-            type: 'item',
-            disabled: false,
-            url: '/dashboard/tokenplataforma',
-            icon: 'feather icon-home'
-          },
-        ],
+        url: '/dashboard/fromProducto',
         icon: 'feather icon-home'
       },
       {
