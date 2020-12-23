@@ -18,12 +18,12 @@
                         <div class="card mb-0 ng-trigger ng-trigger-cardRemove" animatesinitmode="show"
                             style="visibility: visible; opacity: 1;">
                             <div class="card-body ng-tns-c14-23 p-0 ng-star-inserted mouse"
-                                (click)="openPublic( item )">
+                                [routerLink]="['/dashboard/fromProducto', item.id ]" routerLinkActive="router-link-active" >
                                 <img alt="Card image cap" class="card-img-top"
                                     [src]="item.foto || 'https://s3.amazonaws.com/publihazclick/default/fondoTareas.jpg'">
                             </div>
                             <div class="card-body ng-tns-c14-24 m-t-15 ng-star-inserted">
-                                <h5 class="card-title mouse" (click)="openPublic( item )">{{ item.titulo }}</h5>
+                                <h5 class="card-title mouse" [routerLink]="['/dashboard/fromProducto', item.id ]" routerLinkActive="router-link-active" >{{ item.titulo }}</h5>
                                 <p class="card-text"><small class="text-muted">{{ item.createdAt }}</small></p>
                             </div>
                         </div>

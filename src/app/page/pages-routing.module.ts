@@ -15,7 +15,11 @@ const routes: Routes = [
   {
     path: 'fromProducto',
     component: FormproductoComponent
-  }
+  },
+  {
+    path: 'fromProducto/:id',
+    component: FormproductoComponent
+  },
 ];
 
 @NgModule({

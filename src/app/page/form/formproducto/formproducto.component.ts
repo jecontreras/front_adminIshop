@@ -3,6 +3,7 @@ import { ArchivosService } from 'src/app/servicesComponents/archivos.service';
 import { ToolsService } from 'src/app/services/tools.service';
 import { ProductosService } from 'src/app/servicesComponents/productos.service';
 import * as _ from 'lodash';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-formproducto',
@@ -23,15 +24,38 @@ export class FormproductoComponent implements OnInit {
   listGenero:any = [];
   disableEliminar:boolean = false;
   disable:boolean = false;
+  progress:boolean = true;
 
   constructor(
     private _archivos: ArchivosService,
     private _tools: ToolsService,
-    private _productos: ProductosService
+    private _productos: ProductosService,
+    private activate: ActivatedRoute,
+    private Router: Router
   ) { }
 
   ngOnInit() {
     this.opcionCurrencys = this._tools.currency;
+    this.id = this.activate.snapshot.paramMap.get('id');
+    if( this.id ) this.getProductos();
+    else this.progress = false;
+  }
+
+  getProductos(){
+    this._productos.get( { where: { id: this.id }, limit: 1 } ).subscribe( ( res:any ) => {
+      res = res.data[0];
+      if( !res ) return this.Router.navigate( [ '/dashboard/producto' ] );
+      this.data = res;
+      this.data.estado = this.data.estado == 0 ? true : false;
+      this.listGaleria.push( 
+        {
+          id: 1,
+          image: "https://i.postimg.cc/jj6jRTVr/FOTO2.jpg",
+          dataMax: this.data
+        }
+      );
+      this.progress = false;
+    },( error:any )=> { this.progress = false; this.Router.navigate( [ '/dashboard/producto' ] ); });
   }
 
   onSelect(event:any) {
@@ -109,6 +133,7 @@ export class FormproductoComponent implements OnInit {
         if( !result ) resolve( false );
         this.data.id = result.id;
         this.id = result.id;
+        this.data.dataMax = this.data;
         this.listGaleria.push( this.data );
         resolve(true);
       }, (error) => { console.error(error); this._tools.presentToast("Error de servidor"); });
@@ -139,6 +164,7 @@ export class FormproductoComponent implements OnInit {
   async update( data:any ){
     let datas = _.omitBy( data, _.isNull);
     datas =  _.omit(data, [ 'idEmpresa', 'image_galery']);
+    datas.estado = datas.estado == true ? 0 : 2;
     return new Promise( resolve =>{
       this._productos.update( datas ).subscribe(( res:any )=>{
         this._tools.tooast( { title: 'Actualizado exitos' });
@@ -160,5 +186,9 @@ export class FormproductoComponent implements OnInit {
     },(error:any)=> { this._tools.presentToast("Error de servidor"); this.disableEliminar = false; })
   }
 
+  openPublic( item:any ){
+    console.log( item );
+    this.data = item.dataMax;
+  }
 
 }

@@ -32,9 +32,8 @@
                         [options]="opcionCurrencys" />
                 </div>
                 <div class="col-4">
-                    <label for="exampleInputEmail1">Comision</label>
-                    <input currencyMask [(ngModel)]="data.comision" class="form-control form-control-sm"
-                        [options]="opcionCurrencys" />
+                    <label for="exampleInputEmail1">Comision %</label>
+                    <input type="text" class="form-control form-control-sm" [(ngModel)]="data.comision">
                 </div>
                 <div class="col-4">
                     <div class="d-flex justify-content-center">
@@ -44,7 +43,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 row" *ngIf="id">
+        <div class="col-12 row" *ngIf="id && !progress">
             <div class="col-6 conten">
                 <div class="d-flex justify-content-center row" infiniteScroll [infiniteScrollDistance]="3"
                     [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
@@ -81,10 +80,10 @@
                             <option [value]="item.id" *ngFor="let item of listSubCategorias">{{ item.nombre }}</option>
                         </select>
                     </div>
-                    <div class="col-6 col-sm-4 col-md-4">
+                    <!-- <div class="col-6 col-sm-4 col-md-4">
                         <label for="exampleInputEmail1">Empresa</label>
                         <input type="text" class="form-control" [disabled]="false" [(ngModel)]="data.idEmpresa">
-                    </div>
+                    </div> -->
                     <div class="col-6 col-sm-4 col-md-4">
                         <label for="exampleInputEmail1">cantidad</label>
                         <input type="number" class="form-control" [(ngModel)]="data.cantidad">
@@ -105,9 +104,8 @@
                             [options]="opcionCurrencys" />
                     </div>
                     <div class="col-6 col-sm-4 col-md-4">
-                        <label for="exampleInputEmail1">Comision</label>
-                        <input currencyMask [(ngModel)]="data.comision" class="form-control form-control-sm"
-                            [options]="opcionCurrencys" />
+                        <label for="exampleInputEmail1">Comision %</label>
+                        <input type="text" class="form-control form-control-sm" [(ngModel)]="data.comision">
                     </div>
                     <div class="col-6 col-sm-4 col-md-4">
                         <label for="exampleInputEmail1">Subasta</label>
@@ -145,6 +143,18 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="col-12" *ngIf="progress">
+            <div class="d-flex justify-content-center row">
+                <div class="spinner-grow text-primary" role="status"><span class="sr-only">Loading...</span></div>
+                <div class="spinner-grow text-secondary" role="status"><span class="sr-only">Loading...</span></div>
+                <div class="spinner-grow text-success" role="status"><span class="sr-only">Loading...</span></div>
+                <div class="spinner-grow text-danger" role="status"><span class="sr-only">Loading...</span></div>
+                <div class="spinner-grow text-warning" role="status"><span class="sr-only">Loading...</span></div>
+                <div class="spinner-grow text-info" role="status"><span class="sr-only">Loading...</span></div>
+                <div class="spinner-grow text-light" role="status"><span class="sr-only">Loading...</span></div>
+                <div class="spinner-grow text-dark" role="status"><span class="sr-only">Loading...</span></div>
             </div>
         </div>
     </div>
