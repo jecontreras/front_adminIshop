@@ -47,7 +47,7 @@
             <div class="col-6 conten">
                 <div class="d-flex justify-content-center row" infiniteScroll [infiniteScrollDistance]="3"
                     [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
-                    <div class="col-12 col-sm-4 col-xs-4" *ngFor="let item of listGaleria" (click)="verPublicacion( item )">
+                    <div class="col-12 col-sm-4 col-xs-4" *ngFor="let item of listGaleria">
                         <div class="marge-card mb-3">
                             <div class="mat-elevation-z5 p-10">
                                 <div class="card mb-0 ng-trigger ng-trigger-cardRemove" animatesinitmode="show"
@@ -65,7 +65,24 @@
                             </div>
                         </div>
                     </div>
-
+                </div>
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-12">
+                            <h4>Colores</h4>
+                            <div class="d-flex flex-row-reverse bd-highlight">
+                                <div>
+                                    <button type="button" (click)="agregarColor()" class="btn btn-primary">Agregar</button>
+                                </div>
+                              </div>
+                        </div>
+                        <div class="col-3" *ngFor="let item of listColores">
+                            <img [src]="item.foto" alt="" *ngIf="item.foto">
+                            <input type="file" placeholder="Imagenes" (ngModelChange)="datafiles( $event, item )"
+                                (blur)="datafiles( $event, item )">
+                            <input type="text" class="form-control form-control-sm" [(ngModel)]="item.nombre">
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-6 content">
@@ -135,7 +152,26 @@
                         <label for="exampleInputEmail1">Estado</label>
                         <input type="checkbox" class="form-control" [(ngModel)]="data.estado">
                     </div>
+                    <div class="col-6 col-sm-4 col-md-4">
+                        <label for="exampleInputEmail1">Tipo Talla</label>
+                        <select class="form-control form-control-sm" [(ngModel)]="data.tipoTalla" (change)="seleccionTalla()">
+                            <option [value]="item.id" *ngFor="let item of listTipoTallas">{{ item.tit_descripcion }}</option>
+                        </select>
+                    </div>
+                    <div class="col-12" *ngIf="listTallas.length">
+                        <br><br>
+                        <h4>Seleccionar Tallas</h4>
+                    </div>
+                    <div class="col-12" *ngIf="listTallas.length">
+                        <div class="row">
+                            <div class="col-2" *ngFor="let talla of listTallas">
+                                <span>{{ talla.nombre }}</span>
+                                <input type="checkbox" class="form-control" [(ngModel)]="talla.check" (click)="activarTalla( talla )">
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-12">
+                        <br><br>
                         <div class="d-flex flex-row-reverse bd-highlight">
                             <div>
                                 <button type="button" class="btn btn-primary" [disabled]="disable" (click)="submit()">Actualizar</button>

@@ -4,6 +4,9 @@ import { ToolsService } from 'src/app/services/tools.service';
 import { ProductosService } from 'src/app/servicesComponents/productos.service';
 import * as _ from 'lodash';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TipoTallasService } from 'src/app/servicesComponents/tipo-tallas.service';
+import { TallasService } from 'src/app/servicesComponents/tallas.service';
+import { ColoresService } from 'src/app/servicesComponents/colores.service';
 
 @Component({
   selector: 'app-formproducto',
@@ -25,20 +28,30 @@ export class FormproductoComponent implements OnInit {
   disableEliminar:boolean = false;
   disable:boolean = false;
   progress:boolean = true;
+  listTallas:any = [];
+  listColores:any = [];
+  listTipoTallas:any = [];
+  file: any = {
+    foto1: []
+  };
 
   constructor(
     private _archivos: ArchivosService,
     private _tools: ToolsService,
     private _productos: ProductosService,
     private activate: ActivatedRoute,
-    private Router: Router
+    private Router: Router,
+    private _TipoTalla: TipoTallasService,
+    private _Talla: TallasService,
+    private _archivo: ArchivosService
   ) { }
 
   ngOnInit() {
     this.opcionCurrencys = this._tools.currency;
     this.id = this.activate.snapshot.paramMap.get('id');
     if( this.id ) this.getProductos();
-    else this.progress = false;
+    else { this.progress = false; }
+    this.getTipoTalla();
   }
 
   getProductos(){
@@ -55,8 +68,70 @@ export class FormproductoComponent implements OnInit {
         }
       );
       this.progress = false;
+      this.listTallas = this.data.tallas;
+      this.listColores = this.data.colores;
     },( error:any )=> { this.progress = false; this.Router.navigate( [ '/dashboard/producto' ] ); });
   }
+
+  getTipoTalla(){
+    this._TipoTalla.get( { where: { tit_sw_activo: 0 } } ).subscribe(( res:any )=>{
+      this.listTipoTallas = res.data;
+    },( error:any )=> this._tools.tooast( { title: "Error de servidor", icon: "error"} ) );
+  }
+
+  getTallas( tipo:number ){
+    this._Talla.get( { where:{ estado:0, tal_tipo: tipo }, limit: 1000 } ).subscribe( ( res:any )=>{
+      this.listTallas = res.data;
+      for( let row of this.listTallas ) row.check = true;
+      console.log( this.listTallas);
+    },( error:any )=> this._tools.tooast( { title: "Error de servidor", icon: "error"} ) );
+  }
+
+  seleccionTalla(){
+    this.getTallas( this.data.tipoTalla );
+  }
+
+  activarTalla( talla ){
+    talla.check = !talla.check;
+    console.log("***", talla);
+  }
+
+  async datafiles( ev: any, item:any ) {
+    //console.log( ev, this.file );
+    this.file.foto1 = [];
+    try {
+      this.file.foto1 = ev.target.files;
+      if (this.file.foto1[0]) {
+        item.foto = await this._archivo.getBase64(this.file.foto1[0]);
+        this.procesoSubidaImagen( this.file.foto1[0], item );
+      }
+    } catch (error) { }
+  }
+
+  procesoSubidaImagen( file: any, item:any ) {
+    return new Promise(resolve => {
+      let form: any = new FormData();
+      form.append('file', file);
+      this._tools.ProcessTime({});
+      this._archivo.create(form).subscribe((res: any) => {
+        //console.log(form);
+        this._tools.tooast({ title: "subido exitoso" });
+        item.foto = res.files;
+        this.file.foto1= [];
+        resolve( true );
+      }, error => { this._tools.tooast({ title: "Subido Error", icon: "error" }); resolve( false ) })
+    });
+  }
+
+  agregarColor(){
+    this.listColores.push({
+      codigo: this._tools.codigo()
+    });
+  }
+
+
+  onScroll(){}
+
 
   onSelect(event:any) {
     //console.log(event, this.files);
@@ -140,11 +215,6 @@ export class FormproductoComponent implements OnInit {
     });
   }
 
-  verPublicacion( item ){
-    this.id = item.id;
-    this.data = item;
-  }
-
   async submit(){
     this.disable = true;
     if( this.id ) await this.update( this.data );
@@ -188,6 +258,7 @@ export class FormproductoComponent implements OnInit {
 
   openPublic( item:any ){
     console.log( item );
+    this.id = item.id;
     this.data = item.dataMax;
   }
 
