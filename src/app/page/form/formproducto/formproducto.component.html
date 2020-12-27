@@ -72,7 +72,8 @@
                             <h4>Colores</h4>
                             <div class="d-flex flex-row-reverse bd-highlight">
                                 <div>
-                                    <button type="button" (click)="agregarColor()" class="btn btn-primary">Agregar</button>
+                                    <button type="button" (click)="agregarColorNew()" class="btn btn-primary">Agregar</button>
+                                    <button type="button" (click)="agregarColor()" class="btn btn-success">Actualizar</button>
                                 </div>
                               </div>
                         </div>
@@ -80,7 +81,7 @@
                             <img [src]="item.foto" alt="" *ngIf="item.foto">
                             <input type="file" placeholder="Imagenes" (ngModelChange)="datafiles( $event, item )"
                                 (blur)="datafiles( $event, item )">
-                            <input type="text" class="form-control form-control-sm" [(ngModel)]="item.nombre">
+                            <span>Color</span> <input type="text" class="form-control form-control-sm" [(ngModel)]="item.nombre">
                         </div>
                     </div>
                 </div>

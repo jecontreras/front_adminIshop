@@ -34,6 +34,7 @@ export class FormproductoComponent implements OnInit {
   file: any = {
     foto1: []
   };
+  btnDisabled:boolean = false;
 
   constructor(
     private _archivos: ArchivosService,
@@ -60,7 +61,7 @@ export class FormproductoComponent implements OnInit {
       if( !res ) return this.Router.navigate( [ '/dashboard/producto' ] );
       this.data = res;
       this.data.estado = this.data.estado == 0 ? true : false;
-      this.listGaleria.push( 
+      this.listGaleria.push(
         {
           id: 1,
           image: "https://i.postimg.cc/jj6jRTVr/FOTO2.jpg",
@@ -83,6 +84,7 @@ export class FormproductoComponent implements OnInit {
     this._Talla.get( { where:{ estado:0, tal_tipo: tipo }, limit: 1000 } ).subscribe( ( res:any )=>{
       this.listTallas = res.data;
       for( let row of this.listTallas ) row.check = true;
+      this.data.tallas = this.listTallas;
       console.log( this.listTallas);
     },( error:any )=> this._tools.tooast( { title: "Error de servidor", icon: "error"} ) );
   }
@@ -93,7 +95,9 @@ export class FormproductoComponent implements OnInit {
 
   activarTalla( talla ){
     talla.check = !talla.check;
-    console.log("***", talla);
+    this.data.tallas = this.listTallas.filter( ( item:any )=> item.check == true );
+    if( !this.id ) return false;
+    this.submit();
   }
 
   async datafiles( ev: any, item:any ) {
@@ -123,10 +127,16 @@ export class FormproductoComponent implements OnInit {
     });
   }
 
-  agregarColor(){
+  agregarColorNew(){
     this.listColores.push({
       codigo: this._tools.codigo()
     });
+  }
+
+  agregarColor(){
+    if( !this.id ) return false;
+    this.data.colores = this.listColores;
+    this.submit();
   }
 
 
@@ -137,12 +147,12 @@ export class FormproductoComponent implements OnInit {
     //console.log(event, this.files);
     this.files=[event.addedFiles[0]]
   }
-  
+
   onRemove(event) {
     //console.log(event);
     this.files.splice(this.files.indexOf(event), 1);
   }
-  
+
   onSelects(event: any) {
     //console.log(event, this.files);
     this.files.push(...event.addedFiles)
@@ -233,7 +243,7 @@ export class FormproductoComponent implements OnInit {
 
   async update( data:any ){
     let datas = _.omitBy( data, _.isNull);
-    datas =  _.omit(data, [ 'idEmpresa', 'image_galery']);
+    datas =  _.omit(data, [ 'idEmpresa', 'image_galery', 'files']);
     datas.estado = datas.estado == true ? 0 : 2;
     return new Promise( resolve =>{
       this._productos.update( datas ).subscribe(( res:any )=>{
