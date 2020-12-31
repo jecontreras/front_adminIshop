@@ -69,8 +69,9 @@ export class FormproductoComponent implements OnInit {
         }
       );
       this.progress = false;
-      this.listTallas = this.data.tallas;
-      this.listColores = this.data.colores;
+      this.listTallas = this.data.tallas || [];
+      this.listColores = this.data.colores || [];
+      this.seleccionTalla();
     },( error:any )=> { this.progress = false; this.Router.navigate( [ '/dashboard/producto' ] ); });
   }
 
@@ -83,9 +84,15 @@ export class FormproductoComponent implements OnInit {
   getTallas( tipo:number ){
     this._Talla.get( { where:{ estado:0, tal_tipo: tipo }, limit: 1000 } ).subscribe( ( res:any )=>{
       this.listTallas = res.data;
-      for( let row of this.listTallas ) row.check = true;
+      for( let row of this.listTallas ) {
+        let filtro:any = this.data.tallas.find(( item:any )=> Number( item.nombre )== row.nombre );
+        if( filtro ) row.check = true;
+        if( !this.id ) row.check = true;
+      }
       this.data.tallas = this.listTallas;
-      console.log( this.listTallas);
+      this.data.tallas = _.orderBy( this.data.tallas , ['nombre'], ['asc'] );
+      this.listTallas = this.data.tallas;
+      // console.log( this.data.tallas );
     },( error:any )=> this._tools.tooast( { title: "Error de servidor", icon: "error"} ) );
   }
 

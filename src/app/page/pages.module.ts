@@ -13,13 +13,25 @@ import { ComponentModule } from '../component/component.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductoComponent } from './component/producto/producto.component';
 import { FormproductoComponent } from './form/formproducto/formproducto.component';
+import { MarcasComponent } from './component/marcas/marcas.component';
+import { CategoriaComponent } from './component/categoria/categoria.component';
+import { OrdenesComponent } from './component/ordenes/ordenes.component';
+import { NotificacionesComponent } from './component/notificaciones/notificaciones.component';
+import { VendedoresComponent } from './component/vendedores/vendedores.component';
+import { ClientesComponent } from './component/clientes/clientes.component';
 
 @NgModule({
   declarations: [ 
     HomeComponent,
     PagesComponent,
     ProductoComponent,
-    FormproductoComponent
+    FormproductoComponent,
+    MarcasComponent,
+    CategoriaComponent,
+    OrdenesComponent,
+    NotificacionesComponent,
+    VendedoresComponent,
+    ClientesComponent
   ],
   imports: [
     ComponentModule,

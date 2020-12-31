@@ -52,6 +52,54 @@ const NavigationItems = [
         icon: 'feather icon-home'
       },
       {
+        id: 'ordenes',
+        title: 'Ordenes',
+        type: 'item',
+        disabled: false,
+        url: '/dashboard/ordenes',
+        icon: 'feather icon-home'
+      },
+      {
+        id: 'notificaciones',
+        title: 'Notificaciones',
+        type: 'item',
+        disabled: false,
+        url: '/dashboard/notificaciones',
+        icon: 'feather icon-home'
+      },
+      {
+        id: 'vendedores',
+        title: 'Vendedores',
+        type: 'item',
+        disabled: false,
+        url: '/dashboard/vendedores',
+        icon: 'feather icon-home'
+      },
+      {
+        id: 'clientes',
+        title: 'Clientes',
+        type: 'item',
+        disabled: false,
+        url: '/dashboard/clientes',
+        icon: 'feather icon-home'
+      },
+      {
+        id: 'categoria',
+        title: 'Categoria',
+        type: 'item',
+        disabled: false,
+        url: '/dashboard/categoria',
+        icon: 'feather icon-home'
+      },
+      {
+        id: 'marcas',
+        title: 'Marcas',
+        type: 'item',
+        disabled: false,
+        url: '/dashboard/marcas',
+        icon: 'feather icon-home'
+      },
+      {
         id: 'perfil',
         title: 'Editar Perfil',
         type: 'item',
