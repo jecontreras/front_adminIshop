@@ -8,6 +8,7 @@ import { NotificacionesComponent } from './component/notificaciones/notificacion
 import { OrdenesComponent } from './component/ordenes/ordenes.component';
 import { ProductoComponent } from './component/producto/producto.component';
 import { VendedoresComponent } from './component/vendedores/vendedores.component';
+import { FormOrdenesComponent } from './form/form-ordenes/form-ordenes.component';
 import { FormproductoComponent } from './form/formproducto/formproducto.component';
 
 const routes: Routes = [
@@ -38,6 +39,10 @@ const routes: Routes = [
   {
     path: 'ordenes',
     component: OrdenesComponent
+  },
+  {
+    path: 'formOrdenes/:id',
+    component: FormOrdenesComponent
   },
   {
     path: 'notificaciones',

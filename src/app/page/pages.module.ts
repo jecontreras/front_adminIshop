@@ -19,6 +19,7 @@ import { OrdenesComponent } from './component/ordenes/ordenes.component';
 import { NotificacionesComponent } from './component/notificaciones/notificaciones.component';
 import { VendedoresComponent } from './component/vendedores/vendedores.component';
 import { ClientesComponent } from './component/clientes/clientes.component';
+import { FormOrdenesComponent } from './form/form-ordenes/form-ordenes.component';
 
 @NgModule({
   declarations: [ 
@@ -31,7 +32,8 @@ import { ClientesComponent } from './component/clientes/clientes.component';
     OrdenesComponent,
     NotificacionesComponent,
     VendedoresComponent,
-    ClientesComponent
+    ClientesComponent,
+    FormOrdenesComponent
   ],
   imports: [
     ComponentModule,
