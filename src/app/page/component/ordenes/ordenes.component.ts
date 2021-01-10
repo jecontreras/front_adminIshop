@@ -17,12 +17,14 @@ export class OrdenesComponent implements OnInit {
     limit: 10
   };
   dataTablet:any = {
+    header: ["Opciones", "Codigo", "Cedula Cliente", "Nombre Cliente", "Numero Cliente", "Nombre Vendedor", "Cedula Vendedor", "Numero Vendedor", "Comision", "Precio Total", "Ciudad Cliente"],
     data: [],
     count: 0
   };
   progreses:boolean = false;
   notscrolly:boolean=true;
   notEmptyPost:boolean = true;
+  opcionCurrencys:any = {};
 
   constructor(
     private _facturas: OrdenesService,
@@ -30,6 +32,7 @@ export class OrdenesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.opcionCurrencys = this._tools.currency;
     this.getRow();
   }
 

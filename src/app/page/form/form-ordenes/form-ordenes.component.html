@@ -1,69 +1,221 @@
 <div class="content">
     <div class="row">
-        <div class="col-12">
-            <div>
-                <div class="d-flex flex-row-reverse bd-highlight">
-                    <div>
-                        <button type="button" class="btn btn-success">Actualizar</button>
-                    </div>
+        <div class="col-12 shadow-lg p-3 mb-5 bg-white rounded">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <h2>Vendedor</h2>
+                </div>
+                <div></div>
+                <div>
+                    <button type="button" class="btn btn-success" (click)="actualizar()">Actualizar</button>
                 </div>
             </div>
         </div>
-        <div class="col-12 col-sm-4 col-md-3 col-xs-3">
+        <div class="col-12 col-sm-4 col-md-3 col-xs-3 ">
+            <label for="exampleInputEmail1">Nombre Vendedor:</label>&nbsp;
+            <span>
+                {{ data.idVendedor.nombre }} {{ data.idVendedor.apellido}}
+            </span>
+        </div>
+        <div class="col-12 col-sm-4 col-md-3 col-xs-3 ">
+            <label for="exampleInputEmail1">Cedula:</label>&nbsp;
+            <span>
+                {{ data.idVendedor.cedula}}
+            </span>
+        </div>
+        <div class="col-12 col-sm-4 col-md-3 col-xs-3 ">
+            <label for="exampleInputEmail1">Celular:</label>&nbsp;
+            <span>
+                {{ data.idVendedor.celular }}
+            </span>
+        </div>
+        <div class="col-12 col-sm-4 col-md-3 col-xs-3 ">
+            <label for="exampleInputEmail1">Email:</label>&nbsp;
+            <span>
+                {{ data.idVendedor.email }}
+            </span>
+        </div>
+        <div class="col-12 shadow-lg p-3 mb-5 bg-white rounded">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <h2>Cliente</h2>
+                </div>
+                <div></div>
+                <div>
+                    <button type="button" class="btn btn-success" (click)="actualizar()">Actualizar</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-4 col-md-3 col-xs-3 ">
+            <label for="exampleInputEmail1">Nombre Cliente:</label>&nbsp;
+            <span>{{ data.idCliente.nombre }} {{ data.idCliente.apellido }}</span>
+        </div>
+        <div class="col-12 col-sm-4 col-md-3 col-xs-3 ">
+            <label for="exampleInputEmail1">Cedula:</label>&nbsp;
+            <span> {{ data.idCliente.cedula}} </span>
+        </div>
+        <div class="col-12 col-sm-4 col-md-3 col-xs-3 ">
+            <label for="exampleInputEmail1">Celular:</label>&nbsp;
+            <span> {{ data.idCliente.celular }} </span>
+        </div>
+        <div class="col-12 col-sm-4 col-md-3 col-xs-3 ">
+            <label for="exampleInputEmail1">Ciudad:</label>&nbsp;
+            <span> {{ data.ciudadCliente }} </span>
+        </div>
+        <div class="col-12 col-sm-4 col-md-3 col-xs-3 ">
+            <label for="exampleInputEmail1">Barrio:</label>&nbsp;
+            <span> {{ data.idCliente.barrioCliente }} </span>
+        </div>
+        <div class="col-12 col-sm-4 col-md-3 col-xs-3 ">
+            <label for="exampleInputEmail1">Direccion:</label>&nbsp;
+            <span> {{ data.direccionCliente }} </span>
+        </div>
+        <div class="col-12 col-sm-4 col-md-3 col-xs-3 ">
+            <label for="exampleInputEmail1">Email:</label>&nbsp;
+            <span>{{ data.emailCliente }}</span>
+        </div>
+        <div class="col-12 shadow-lg p-3 mb-5 bg-white rounded">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <h2>Detalle</h2>
+                </div>
+                <div></div>
+                <div>
+                    <button type="button" class="btn btn-success" (click)="actualizar()">Actualizar</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 content">
+            <div class="row">
+                <div class="col-12 col-sm-4 col-md-3 col-xs-3 ">
+                    <label for="exampleInputEmail1">Codigo:</label>&nbsp;
+                    <span>{{ data.codigo }}</span>
+                </div>
+                <div class="col-12 col-sm-4 col-md-3 col-xs-3 ">
+                    <label for="exampleInputEmail1">Fecha del Pedido:</label>&nbsp;
+                    <span>{{ data.fecha_pedido | date:'medium' }}</span>
+                </div>
+                <div class="col-12 col-sm-4 col-md-3 col-xs-3 ">
+                    <label for="exampleInputEmail1">Precio Total:</label>
+                    <input currencyMask [(ngModel)]="data.precio" class="form-control form-control-sm"
+                        [options]="opcionCurrencys" />
+                </div>
+                <div class="col-12 col-sm-4 col-md-3 col-xs-3 ">
+                    <label for="exampleInputEmail1">Comision del vendedor:</label>
+                    <input currencyMask [(ngModel)]="data.comision" class="form-control form-control-sm"
+                        [options]="opcionCurrencys" />
+                </div>
+                <div class="col-12 col-sm-4 col-md-3 col-xs-3 ">
+                    <label for="exampleInputEmail1">Estado:</label>&nbsp;
+                    <span>{{ data.estadoName }}</span>
+                </div>
+                <div class="col-12 col-sm-4 col-md-3 col-xs-3 ">
+                    <label for="exampleInputEmail1">Estado de la venta:</label>
+                    <select class="form-control form-control-sm" [(ngModel)]="data.estado" (change)="EstadoDetalle()">
+                        <option value="0">
+                            Proceso
+                        </option>
+                        <option value="1">
+                            Completado
+                        </option>
+                        <option value="2">
+                            Eliminado
+                        </option>
+                        <option value="3">
+                            Cancelado
+                        </option>
+                        <option value="4">
+                            Novedad
+                        </option>
+                        <option value="5">
+                            Enviado
+                        </option>
+                    </select>
+                </div>
+                <div class="col-12 col-sm-4 col-md-3 col-xs-3 ">
+                    <label for="exampleInputEmail1">Empresa Transportadora:</label>
+                    <input type="text" class="form-control" [(ngModel)]="data.empresaTrans">
+                </div>
+                <div class="col-12 col-sm-4 col-md-3 col-xs-3 ">
+                    <label for="exampleInputEmail1">Numero Remesa:</label>
+                    <input type="text" class="form-control" [(ngModel)]="data.idRemesa">
+                </div>
+                <div class="col-12">
+                    <label for="exampleInputEmail1">Descripcion:</label>
+                    <textarea class="form-control" [(ngModel)]="data.detalles" rows="3"></textarea>
+                </div>
+            </div>
+            <br>
+        </div>
+        <div class="col-12 shadow-lg p-3 mb-5 bg-white rounded">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <h2>Productos</h2>
+                </div>
+                <div></div>
+                <div>
+                    <button type="button" class="btn btn-success" (click)="actualizar()">Actualizar</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="d-flex justify-content-center row">
+                <div class="col-2" *ngFor="let item of listRow">
+                    <div class="marge-card mb-3">
+                        <div class="mat-elevation-z5 p-10">
+                            <div class="card mb-0 ng-trigger ng-trigger-cardRemove" animatesinitmode="show"
+                                style="visibility: visible; opacity: 1;">
+                                <div class="card-body ng-tns-c14-23 p-0 ng-star-inserted mouse"
+                                    [routerLink]="['/dashboard/fromProducto', item.ids ]">
+                                    <img alt="Card image cap" class="card-img-top"
+                                        [src]="item.foto || 'https://s3.amazonaws.com/publihazclick/default/fondoTareas.jpg'">
+                                </div>
+                                <div class="card-body ng-tns-c14-24 m-t-15 ng-star-inserted">
+                                    <h5 class="card-title mouse">{{ item.titulo }}</h5>
+                                    <p>Precio: <input currencyMask [(ngModel)]="data.precio"
+                                            class="form-control form-control-sm" [options]="opcionCurrencys" /></p>
+                                    <p class="card-text"><small class="text-muted">Cantidad: &nbsp;{{ item.cantidad
+                                            }}</small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-12" *ngIf="progreses">
+            <div class="d-flex justify-content-center row">
+                <div class="spinner-grow text-primary" role="status"><span class="sr-only">Loading...</span></div>
+                <div class="spinner-grow text-secondary" role="status"><span class="sr-only">Loading...</span></div>
+                <div class="spinner-grow text-success" role="status"><span class="sr-only">Loading...</span></div>
+                <div class="spinner-grow text-danger" role="status"><span class="sr-only">Loading...</span></div>
+                <div class="spinner-grow text-warning" role="status"><span class="sr-only">Loading...</span></div>
+                <div class="spinner-grow text-info" role="status"><span class="sr-only">Loading...</span></div>
+                <div class="spinner-grow text-light" role="status"><span class="sr-only">Loading...</span></div>
+                <div class="spinner-grow text-dark" role="status"><span class="sr-only">Loading...</span></div>
+            </div>
+        </div>
+
+        <div class="col-12" *ngIf="!progreses && listRow.length == 0">
+            <div class="d-flex justify-content-center row">
+                <div role="alert" class="alert alert-primary">No Hay Datos Para Mostrar</div>
+            </div>
+        </div>
+
+        <!-- <div class="col-12 col-sm-4 col-md-3 col-xs-3 ">
             <label for="exampleInputEmail1">Titulo</label>
             <input type="text" class="form-control" [(ngModel)]="data.titulo">
         </div>
-        <div class="col-12 col-sm-4 col-md-3 col-xs-3">
+        <div class="col-12 col-sm-4 col-md-3 col-xs-3 ">
             <label for="exampleInputEmail1">Titulo</label>
             <input type="text" class="form-control" [(ngModel)]="data.titulo">
         </div>
-        <div class="col-12 col-sm-4 col-md-3 col-xs-3">
+        <div class="col-12 col-sm-4 col-md-3 col-xs-3 ">
             <label for="exampleInputEmail1">Titulo</label>
             <input type="text" class="form-control" [(ngModel)]="data.titulo">
-        </div>
-        <div class="col-12 col-sm-4 col-md-3 col-xs-3">
-            <label for="exampleInputEmail1">Titulo</label>
-            <input type="text" class="form-control" [(ngModel)]="data.titulo">
-        </div>
-        <div class="col-12 col-sm-4 col-md-3 col-xs-3">
-            <label for="exampleInputEmail1">Titulo</label>
-            <input type="text" class="form-control" [(ngModel)]="data.titulo">
-        </div>
-        <div class="col-12 col-sm-4 col-md-3 col-xs-3">
-            <label for="exampleInputEmail1">Titulo</label>
-            <input type="text" class="form-control" [(ngModel)]="data.titulo">
-        </div>
-        <div class="col-12 col-sm-4 col-md-3 col-xs-3">
-            <label for="exampleInputEmail1">Titulo</label>
-            <input type="text" class="form-control" [(ngModel)]="data.titulo">
-        </div>
-        <div class="col-12 col-sm-4 col-md-3 col-xs-3">
-            <label for="exampleInputEmail1">Titulo</label>
-            <input type="text" class="form-control" [(ngModel)]="data.titulo">
-        </div>
-        <div class="col-12 col-sm-4 col-md-3 col-xs-3">
-            <label for="exampleInputEmail1">Titulo</label>
-            <input type="text" class="form-control" [(ngModel)]="data.titulo">
-        </div>
-        <div class="col-12 col-sm-4 col-md-3 col-xs-3">
-            <label for="exampleInputEmail1">Titulo</label>
-            <input type="text" class="form-control" [(ngModel)]="data.titulo">
-        </div>
-        <div class="col-12 col-sm-4 col-md-3 col-xs-3">
-            <label for="exampleInputEmail1">Titulo</label>
-            <input type="text" class="form-control" [(ngModel)]="data.titulo">
-        </div>
-        <div class="col-12 col-sm-4 col-md-3 col-xs-3">
-            <label for="exampleInputEmail1">Titulo</label>
-            <input type="text" class="form-control" [(ngModel)]="data.titulo">
-        </div>
-        <div class="col-12 col-sm-4 col-md-3 col-xs-3">
-            <label for="exampleInputEmail1">Titulo</label>
-            <input type="text" class="form-control" [(ngModel)]="data.titulo">
-        </div>
-        <div class="col-12 col-sm-4 col-md-3 col-xs-3">
-            <label for="exampleInputEmail1">Titulo</label>
-            <input type="text" class="form-control" [(ngModel)]="data.titulo">
-        </div>
+        </div> -->
     </div>
 </div>

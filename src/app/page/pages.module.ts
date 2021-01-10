@@ -20,6 +20,8 @@ import { NotificacionesComponent } from './component/notificaciones/notificacion
 import { VendedoresComponent } from './component/vendedores/vendedores.component';
 import { ClientesComponent } from './component/clientes/clientes.component';
 import { FormOrdenesComponent } from './form/form-ordenes/form-ordenes.component';
+import { FormCategoriaComponent } from './form/form-categoria/form-categoria.component';
+import { FormMarcaComponent } from './form/form-marca/form-marca.component';
 
 @NgModule({
   declarations: [ 
@@ -33,7 +35,9 @@ import { FormOrdenesComponent } from './form/form-ordenes/form-ordenes.component
     NotificacionesComponent,
     VendedoresComponent,
     ClientesComponent,
-    FormOrdenesComponent
+    FormOrdenesComponent,
+    FormCategoriaComponent,
+    FormMarcaComponent
   ],
   imports: [
     ComponentModule,

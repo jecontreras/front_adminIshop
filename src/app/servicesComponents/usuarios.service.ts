@@ -33,9 +33,6 @@ export class UsuariosService {
     return this._model.querys('personas/nivelUser',query, 'post');
   }
 
-  cambioPass(query:any){
-    return this._model.querys('personas/cambioPass',query, 'post');
-  }
 
   login(query:any){
     return this._model.querys('personas/login',query, 'post');
@@ -52,6 +49,11 @@ export class UsuariosService {
   delete(query:any){
     return this._model.querys('personas/'+query.id, query, 'delete');
   }
+
+  cambiarPass(query:any){
+    return this._model.querys('personas/cambiarpass',query, 'post');
+  }
+
   procesoFacebook(){
     FB.getLoginStatus(function(response) {
       console.log( response );

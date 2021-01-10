@@ -36,19 +36,28 @@ const NavigationItems = [
     icon: 'feather icon-monitor',
     children: [
       {
-        id: 'productos',
+        id: 'Productos',
         title: 'Productos',
-        type: 'item',
+        type: 'collapse',
         disabled: false,
-        url: '/dashboard/producto',
-        icon: 'feather icon-home'
-      },
-      {
-        id: 'productosCrear',
-        title: 'Productos Crear',
-        type: 'item',
-        disabled: false,
-        url: '/dashboard/fromProducto',
+        children:[
+          {
+            id: 'listaproductos',
+            title: 'Lista Productos',
+            type: 'item',
+            disabled: false,
+            url: '/dashboard/producto',
+            icon: 'feather icon-home'
+          },
+          {
+            id: 'productosCrear',
+            title: 'Productos Crear',
+            type: 'item',
+            disabled: false,
+            url: '/dashboard/fromProducto',
+            icon: 'feather icon-home'
+          },
+        ],
         icon: 'feather icon-home'
       },
       {

@@ -3,52 +3,56 @@
 
     </div>
     <div class="col-12">
-        <table class="table" infiniteScroll [infiniteScrollDistance]="3"
-        [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
+        <table class="table" infiniteScroll [infiniteScrollDistance]="3" [infiniteScrollThrottle]="50"
+            (scrolled)="onScroll()">
             <thead>
-              <tr>
-                <th scope="col">Opciones</th>
-                <th scope="col">Codigo</th>
-                <th scope="col">Cedula Cliente</th>
-                <th scope="col">Nombre Cliente</th>
-                <th scope="col">Numero Cliente</th>
-                <th scope="col">Nombre Vendedor</th>
-                <th scope="col">Cedula Vendedor</th>
-                <th scope="col">Numero Vendedor</th>
-                <th scope="col">Comision</th>
-                <th scope="col">Precio Total</th>
-                <th scope="col">Ciudad Cliente</th>
-              </tr>
+                <tr>
+                    <th scope="col" *ngFor="let item of dataTablet.header">{{ item }}</th>
+                </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of dataTablet.data">
-                <th scope="row" style="width: 10%;">
-                    <div class="d-flex flex-row bd-highlight mb-3">
-                        <div>
-                            <button type="button" class="btn btn-primary" [routerLink]="['/dashboard/formOrdenes', item.id ]">
-                                <i class="fa fa-eye" aria-hidden="true"></i>
-                            </button>
+                <tr *ngFor="let item of dataTablet.data" [ngClass]="{
+                'estProceso':item.estado === 0,
+                'estCompletado':item.estado === 1,
+                'estEliminado':item.estado === 2,
+                'estCancelado':item.estado === 3,
+                'estNovedad':item.estado === 4,
+                'estEnviando':item.estado === 5
+              }">
+                    <th scope="row" style="width: 10%;">
+                        <div class="d-flex flex-row bd-highlight mb-3">
+                            <div>
+                                <button type="button" class="btn btn-primary"
+                                    [routerLink]="['/dashboard/formOrdenes', item.id ]">
+                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                            <div>
+                                <button type="button" class="btn btn-danger">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </button>
+                            </div>
                         </div>
-                        <div>
-                            <button type="button" class="btn btn-danger">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </button>
-                        </div>
-                    </div>
-                </th>  
-                <th scope="row">{{ item.codigo }}</th>
-                <td>{{ item.cedulaCliente }}</td>
-                <td>{{ item['idCliente']?.nombre }}  {{ item['idCliente']?.apellido }}</td>
-                <td>{{ item['idCliente']?.celular }}</td>
-                <td>{{ item['idVendedor']?.nombre }}</td>
-                <td>{{ item['idVendedor']?.cedula }}</td>
-                <td>{{ item['idVendedor']?.celular }}</td>
-                <td>{{ item.comision }}</td>
-                <td>{{ item.precio }}</td>
-                <td>{{ item.ciudadCliente }}</td>
-              </tr>
+                    </th>
+                    <th scope="row">{{ item.codigo }}</th>
+                    <td>{{ item.cedulaCliente }}</td>
+                    <td>{{ item['idCliente']?.nombre }} {{ item['idCliente']?.apellido }}</td>
+                    <td>{{ item['idCliente']?.celular }}</td>
+                    <td>{{ item['idVendedor']?.nombre }}</td>
+                    <td>{{ item['idVendedor']?.cedula }}</td>
+                    <td>{{ item['idVendedor']?.celular }}</td>
+                    <td>
+                        <input currencyMask [(ngModel)]="item.comision" class="form-control form-control-sm"
+                            [options]="opcionCurrencys" disabled/>
+                    </td>
+                    <td>
+                        <input currencyMask [(ngModel)]="item.precio" class="form-control form-control-sm"
+                            [options]="opcionCurrencys" disabled/>
+                    </td>
+                    <td>{{ item.ciudadCliente }}</td>
+                </tr>
             </tbody>
-          </table>
+        </table>
     </div>
     <div class="col-12" *ngIf="progreses">
         <div class="d-flex justify-content-center row">
