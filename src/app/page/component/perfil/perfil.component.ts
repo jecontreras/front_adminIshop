@@ -131,12 +131,12 @@ export class PerfilComponent implements OnInit {
       confirpassword: this.data.confirpassword
     };
     if( data.password !== data.confirpassword ) return this._tools.tooast({ title: "Error las contraseñas no son iguales", icon: "error"});
-    this._user.cambioPass(data).subscribe((res:any)=>{
+    /*this._user.cambioPass(data).subscribe((res:any)=>{
       console.log(res);
       this._tools.tooast( { title: "Contraseña actualizada" });
     },(error)=> { 
       let errors = error.error.data;
-      this._tools.tooast( { title: errors ||  "Error de servidor", icon: "error" } ); } );
+      this._tools.tooast( { title: errors ||  "Error de servidor", icon: "error" } ); } );*/
   }
 
 }

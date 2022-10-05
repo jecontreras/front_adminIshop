@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,WAAW,CAAA;EACP,UAAU,EAAE,OAAO;CACtB;;AACD,AAAA,cAAc,CAAA;EACV,UAAU,EAAE,OAAO;CACtB;;AACD,AAAA,aAAa,CAAA;EACT,UAAU,EAAE,OAAO;CACtB;;AACD,AAAA,aAAa,CAAA;EACT,UAAU,EAAE,OAAO;CACtB;;AACD,AAAA,WAAW,CAAA;EACP,UAAU,EAAE,OAAO;CACtB;;AACD,AAAA,YAAY,CAAA;EACR,UAAU,EAAE,OAAO;CACtB",
+    "sources": [
+        "ordenes.component.scss"
+    ],
+    "names": [],
+    "file": "ordenes.component.css"
+}
